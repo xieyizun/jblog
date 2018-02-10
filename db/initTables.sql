@@ -1,0 +1,1 @@
+insert into users (name, email, password) values ("admin", 'xieyizun@163.com', '123456');

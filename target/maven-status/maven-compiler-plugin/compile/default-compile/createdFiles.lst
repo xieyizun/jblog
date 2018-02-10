@@ -1,6 +1,0 @@
-org/xyz/jblog/entity/User.class
-org/xyz/jblog/base/EntityBase.class
-org/xyz/jblog/entity/Category.class
-org/xyz/jblog/web/HomeController.class
-org/xyz/jblog/App.class
-org/xyz/jblog/entity/Article.class

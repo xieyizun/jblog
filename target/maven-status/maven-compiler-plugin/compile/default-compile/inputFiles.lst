@@ -1,5 +1,7 @@
 /Users/Louise/Documents/workspace/jblog/src/main/java/org/xyz/jblog/web/HomeController.java
+/Users/Louise/Documents/workspace/jblog/src/main/java/org/xyz/jblog/dao/UserDao.java
 /Users/Louise/Documents/workspace/jblog/src/main/java/org/xyz/jblog/App.java
+/Users/Louise/Documents/workspace/jblog/src/main/java/org/xyz/jblog/service/UserService.java
 /Users/Louise/Documents/workspace/jblog/src/main/java/org/xyz/jblog/entity/Article.java
 /Users/Louise/Documents/workspace/jblog/src/main/java/org/xyz/jblog/entity/User.java
 /Users/Louise/Documents/workspace/jblog/src/main/java/org/xyz/jblog/base/EntityBase.java
