@@ -1,2 +1,2 @@
 # jblog
-spring, spring mvc, mybitas, thymeleaf
+spring, spring mvc, mybitas, thymeleaf, hibernate validator
