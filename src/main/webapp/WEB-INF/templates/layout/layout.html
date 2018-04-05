@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" th:href="@{/static/css/layout/layout.css}" />		
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+		<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<title>XYZ的博客</title>
+	</head>
+	<body>
+		<div th:insert="components/header :: header"></div>
+		<div class="root-container">
+			<div layout:fragment="content"></div>
+		</div>
+		<div th:insert="components/footer :: footer"></div>
+	</body>
+</html>
