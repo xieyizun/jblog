@@ -1,12 +1,16 @@
-nav.navbar-fixed-top {
-	
-}
-a.login-link {
-		margin-top: 8px;
+.root-container .main-container {
+	padding: 24px 12px;
 }
 div.root-container {
 	margin: 50px 0 0 0;
 }
+a.login-link {
+		margin-top: 8px;
+}
+.current-user {
+	    margin-top: 15px;
+}
+
 footer.footer {
 	background: black;
     text-align: center;

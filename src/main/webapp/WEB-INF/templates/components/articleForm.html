@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<div th:fragment="form">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel-group" id="accordion">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion"
+										href="#collapseOne"><span class="glyphicon glyphicon-file">
+									</span>新建文章</a>
+									 <a th:href="@{'/'}" href="#" class="pull-right">返回首页</a>
+								</h4>
+							</div>
+							<div id="collapseOne" class="panel-collapse collapse in" th:object="${article}" >
+								<form class="panel-body" th:action="@{/article/save}" method="post">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<input type="hidden" name="articleId" th:value="*{id}" />
+												<input type="text" class="form-control" name="subject" th:value="*{subject}"
+													placeholder="主题" required />
+											</div>
+											<div class="form-group">
+												<textarea class="form-control" placeholder="内容" name="content" th:text="*{content}"
+													rows="5" required></textarea>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="category">类别</label>
+												<select class="form-control" id="category" name="categoryId">
+													<option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+													
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="tags">标签</label>
+												<input type="text" class="form-control" id="tags" placeholder="标签" />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="well well-sm well-primary">
+												<div class="form form-inline ">
+													<div class="form-group">
+														<select class="form-control">
+															<option>草稿</option>
+															<option>发布</option>
+														</select>
+													</div>
+													<div class="form-group">
+														<button type="submit" class="btn btn-success btn-sm">
+															<span class="glyphicon glyphicon-floppy-disk"></span>保存
+														</button>
+														<button type="button" class="btn btn-default btn-sm">
+															<span class="glyphicon glyphicon-eye-open"></span>预览
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

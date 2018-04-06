@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html layout:decorator="layout/layout"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" th:href="@{/static/css/articles/article.css}" />
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid main-container">
+			<div th:insert="components/articleForm :: form"></div>
+		</div>
+	</div>
+</body>
+</html>

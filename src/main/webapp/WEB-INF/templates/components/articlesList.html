@@ -4,20 +4,28 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">最近文章</div>
 		<div class="panel-body">
-			<ul>
-				<li th:each="article : ${recentArticles}">
-					<div>
-						<div>
-							<a th:href="@{'/article/'+${article.id}}"
-								th:text="${article.subject}"></a>
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-9 col-xs-12">
+					<article th:each="article : ${recentArticles}">
+						<div class="row">
+							<div class="col-sm-10 col-md-12" th:object="${article}">
+								<a th:href="@{'/article/'+*{id}}" href="#" >
+									<h4 th:text="*{subject}">暂无主题</h4>
+								</a>
+								<p th:text="*{content}">暂无内容</p>
+								<section>
+									<i class="glyphicon glyphicon-folder-open"></i><span th:text="*{category}">java</span>
+									<i class="glyphicon glyphicon-user"></i><span th:text="*{author}">xyz</span>
+									<i class="glyphicon glyphicon-calendar"></i><span th:text="*{createdAt}">2018/04/06</span>
+									<i class="glyphicon glyphicon-eye-open"></i><span>1000</span>
+									<i class="glyphicon glyphicon-comment"></i><span>50</span>
+									<a th:href="@{'/article/'+*{id}}" href="#" class="btn btn-default btn-sm pull-right">更多 ... </a>
+								</section>
+							</div>
 						</div>
-						<div th:text="${article.content}"></div>
-						<div>
-							<div th:text="${article.createdAt}"></div>
-						</div>
-					</div>
-				</li>
-			</ul>
+					</article>
+				</div>
+			</div>
 		</div>
 	</div>
 	<nav aria-label="Page navigation example">

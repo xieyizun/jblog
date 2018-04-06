@@ -14,4 +14,8 @@ import org.xyz.jblog.entity.User;
  */
 public interface UserDao {
 	List<User> listUsers();
+	
+	Integer insertUserAndGetId(User user);
+	
+	List<User> findUserByNameOrEmail(User user);
 }

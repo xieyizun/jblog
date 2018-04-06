@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.xyz.jblog.entity.Article;
 import org.xyz.jblog.entity.User;
+import org.xyz.jblog.service.ArticleService;
 import org.xyz.jblog.service.UserService;
 
 /**
@@ -27,6 +28,8 @@ import org.xyz.jblog.service.UserService;
 public class HomeController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ArticleService articleService;
 	
 	@RequestMapping(value="/hello/{name}", method=RequestMethod.GET)
 	public String hello(@PathVariable String name, ModelMap map) {
@@ -43,17 +46,7 @@ public class HomeController {
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String index(ModelMap map) {
-		List<Article> recentArticles = new ArrayList<Article>();
-		Article article = null;
-		for (int i = 0; i < 5; i++) {
-			article = new Article();
-			article.setContent("test"+i);
-			article.setId(i+1);
-			article.setSubject("subject"+i);
-			article.setCreatedAt(new Date());
-			article.setUpdatedAt(new Date());
-			recentArticles.add(article);
-		}
+		List<Article> recentArticles = articleService.getAllArticles();
 		map.put("recentArticles", recentArticles);
 		return "index";
 	}

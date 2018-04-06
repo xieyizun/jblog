@@ -46,5 +46,7 @@ public class User extends EntityBase<User> {
 		this.password = password;
 	}
 	
-	
+	public String toString() {
+		return this.name + "-" + this.email;
+	}
 }

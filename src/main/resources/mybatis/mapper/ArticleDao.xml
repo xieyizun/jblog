@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xyz.jblog.dao.ArticleDao">
+    <!-- List<Article> getAllArticles();
+	List<Article> getArticlesByUserId(Integer userId);
+	Article getArticleById(Integer articleId);
+	Article getArticleByIdAndUserId(Integer id, Integer userId);
+	Integer insertArticle(Article article);
+	Integer updateArticle(Article article);
+	Integer deleteArticle(Article article); -->
+	
+	<select id="getAllArticles" resultType="Article">
+		select * from articles where enabled=1
+	</select>
+	
+	<select id="getArticlesByUserId" resultType="Article">
+		select * from articles where enabled=1 and user_id=#{userId}
+	</select>
+	
+	<select id="getArticleById" resultType="Article">
+		select * from articles where enabled=1 and id=#{id}
+	</select>
+	
+	<select id="getArticleByIdAndUserId" resultType="Article">
+		select * from articles where enabled=1 and id=#{id} and user_id=#{userId}
+	</select>
+	
+	<insert id="insertArticle" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+		insert into articles(subject, content, category_id, user_id) values (#{subject}, #{content}, #{category.id}, #{author.id})
+	</insert>
+	
+	<update id="updateArticle" parameterType="User" keyProperty="id">
+		update articles set subject=#{subject}, content=#{content}, category_id=#{category.id} where id=#{id}
+	</update>
+	
+	<delete id="deleteArticle" parameterType="Article">
+		update articles set enabled=0 where id=#{id}
+	</delete>
+</mapper>

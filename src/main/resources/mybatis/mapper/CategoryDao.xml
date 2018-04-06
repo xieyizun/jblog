@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xyz.jblog.dao.CategoryDao">
+    <select id="getAllCategories" resultType="Category">
+		select * from categories
+	</select>
+	
+	<select id="getCategoryById" resultType="Category">
+		select * from categories where enabled=1 and id=#{id}
+	</select>
+</mapper>

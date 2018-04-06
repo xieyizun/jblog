@@ -17,8 +17,8 @@ public abstract class EntityBase<T> implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private Date createdAt;
-	private Date updatedAt;
+	private Date createdAt = new Date();
+	private Date updatedAt = new Date();
 	public Integer getId() {
 		return id;
 	}

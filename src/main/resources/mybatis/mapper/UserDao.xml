@@ -2,8 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.xyz.jblog.dao.UserDao">
     
-	<select id="listUsers" resultType="org.xyz.jblog.entity.User">
+	<select id="listUsers" resultType="User">
 		SELECT *
 		FROM users
 	</select>
+	
+	<select id="findUserByNameOrEmail" parameterType="User" resultType="User">
+		select * from users where enabled=1 and password=#{password} and (name=#{name} or email=#{name})
+	</select>
+	
+	<insert id="insertUserAndGetId" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+		insert into users(name, email, password) values (#{name}, #{email}, #{password})
+	</insert>
 </mapper>

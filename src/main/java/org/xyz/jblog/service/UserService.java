@@ -25,4 +25,14 @@ public class UserService {
 	public List<User> getAllUsers() {
 		return userDao.listUsers();
 	}
+	
+	@Transactional
+	public Integer saveUser(User user) {
+		return userDao.insertUserAndGetId(user);
+	}
+	
+	@Transactional
+	public List<User> findUserByNameOrEmail(User user) {
+		return userDao.findUserByNameOrEmail(user);
+	}
 }
