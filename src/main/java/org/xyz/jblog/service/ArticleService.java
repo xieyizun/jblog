@@ -13,8 +13,8 @@ import org.xyz.jblog.entity.Article;
  *
  */
 public interface ArticleService {
-	List<Article> getAllArticles(int page, int pageSize);
-	List<Article> getArticlesByUserId(Integer userId);
+	List<Article> getAllArticles(int page);
+	List<Article> getArticlesByUserId(Integer userId, int page);
 	public Article getArticleById(Integer articleId);
 	public Article getArticleByIdAndUserId(Integer id, Integer userId);
 	public Integer insertArticle(Article article);

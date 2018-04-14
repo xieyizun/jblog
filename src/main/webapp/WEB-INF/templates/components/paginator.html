@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+	<nav th:fragment="paginator" aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<li class="page-item"
+				th:classappend="${currentPage==1} ? 'disabled' : ''"><a class="page-link" 
+				th:href="${currentPage==1} ? '#' : @{${nextPageUrl}+'?page='+${currentPage-1}}"
+				tabindex="-1">上一页</a></li>
+			<li class="page-item" th:each="page : ${#numbers.sequence(1, pages)}">
+				<a class="page-link" th:href="@{${nextPageUrl}+'?page='+${page}}" th:text="${page}"></a>
+			</li>
+			<li class="page-item"
+				th:classappend="${currentPage==pages} ? 'disabled' : ''"><a class="page-link" 
+				th:href="${currentPage==pages} ? '#' : @{${nextPageUrl}+'?page='+${currentPage+1}}">下一页</a></li>
+		</ul>
+	</nav>
+</html>

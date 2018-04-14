@@ -12,7 +12,7 @@ import org.xyz.jblog.entity.User;
 /**
  *
  */
-public class HttpUtils {
+public final class HttpUtils {
 	public static User getCurrentLoginUser(HttpServletRequest request) {
 		return (User)request.getSession().getAttribute("currentUser");
 	}

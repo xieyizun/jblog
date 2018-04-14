@@ -13,7 +13,7 @@ import org.xyz.jblog.entity.User;
  *
  */
 public interface UserService {	
-	List<User> getAllUsers();
+	List<User> getAllUsers(int page);
 	
 	Integer saveUser(User user);
 	

@@ -8,10 +8,12 @@ package org.xyz.jblog.base;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.xyz.blog.interfaces.Paginatable;
+
 /**
  *
  */
-public abstract class EntityBase<T> implements Serializable {
+public abstract class EntityBase<T> implements Serializable, Paginatable {
 	/**
 	 * 
 	 */

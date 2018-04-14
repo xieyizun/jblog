@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.xyz.blog.constants.ConstantsNumber;
 import org.xyz.jblog.dao.ArticleDao;
 import org.xyz.jblog.entity.Article;
 import org.xyz.jblog.service.ArticleService;
@@ -25,13 +26,14 @@ public class ArticleServiceImpl implements ArticleService {
 	private ArticleDao articleDao;
 	
 	@Override
-	public List<Article> getAllArticles(int page, int pageSize) {
-		PageHelper.startPage(page, pageSize);
+	public List<Article> getAllArticles(int page) {
+		PageHelper.startPage(page, ConstantsNumber.pageSize);
 		return articleDao.getAllArticles();
 	}
 	
 	@Override
-	public List<Article> getArticlesByUserId(Integer userId) {
+	public List<Article> getArticlesByUserId(Integer userId, int page) {
+		PageHelper.startPage(page, ConstantsNumber.pageSize);
 		return articleDao.getArticlesByUserId(userId);
 	}
 	
