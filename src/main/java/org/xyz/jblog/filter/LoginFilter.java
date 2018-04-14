@@ -3,7 +3,7 @@
  * @date 2018年4月8日
  * @version 1.0
  */
-package org.xyz.blog.filter;
+package org.xyz.jblog.filter;
 
 import java.io.IOException;
 import java.util.ArrayList;

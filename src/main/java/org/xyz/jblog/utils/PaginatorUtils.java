@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.xyz.blog.interfaces.Paginatable;
 import org.xyz.jblog.entity.Article;
+import org.xyz.jblog.interfaces.Paginatable;
 
 import com.github.pagehelper.Page;
 

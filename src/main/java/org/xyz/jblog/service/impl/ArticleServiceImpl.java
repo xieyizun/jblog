@@ -10,7 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.xyz.blog.constants.ConstantsNumber;
+import org.xyz.jblog.constants.ConstantsNumber;
 import org.xyz.jblog.dao.ArticleDao;
 import org.xyz.jblog.entity.Article;
 import org.xyz.jblog.service.ArticleService;

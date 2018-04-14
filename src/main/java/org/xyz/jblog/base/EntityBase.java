@@ -8,7 +8,7 @@ package org.xyz.jblog.base;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.xyz.blog.interfaces.Paginatable;
+import org.xyz.jblog.interfaces.Paginatable;
 
 /**
  *
