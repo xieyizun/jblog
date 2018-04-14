@@ -13,6 +13,6 @@ import org.xyz.jblog.entity.Category;
  *
  */
 public interface CategoryDao {
-	List<Category> getAllCategories();
+	List<Category> getAllCategoriesByUserId(Integer userId);
 	Category getCategoryById(Integer id);
 }

@@ -25,8 +25,8 @@ public class CategoryServiceImpl implements CategoryService {
 	 * @see org.xyz.jblog.service.CategoryService#getAllCategories()
 	 */
 	@Override
-	public List<Category> getAllCategories() {
-		return categoryDao.getAllCategories();
+	public List<Category> getAllCategoriesByUserId(Integer userId) {
+		return categoryDao.getAllCategoriesByUserId(userId);
 	}
 
 	/* (non-Javadoc)

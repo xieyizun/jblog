@@ -12,6 +12,6 @@
 	</select>
 	
 	<insert id="insertUserAndGetId" parameterType="User" useGeneratedKeys="true" keyProperty="id">
-		insert into users(name, email, password) values (#{name}, #{email}, #{password})
+		insert into users(name, email, password, created_at) values (#{name}, #{email}, #{password}, #{createdAt})
 	</insert>
 </mapper>

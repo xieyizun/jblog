@@ -66,14 +66,14 @@
 	</select>
 	
 	<insert id="insertArticle" parameterType="User" useGeneratedKeys="true" keyProperty="id">
-		insert into articles(subject, content, category_id, user_id) values (#{subject}, #{content}, #{category.id}, #{author.id})
+		insert into articles(subject, content, category_id, user_id, created_at) values (#{subject}, #{content}, #{category.id}, #{author.id}, #{createdAt})
 	</insert>
 	
 	<update id="updateArticle" parameterType="User" keyProperty="id">
-		update articles set subject=#{subject}, content=#{content}, category_id=#{category.id} where id=#{id}
+		update articles set subject=#{subject}, content=#{content}, category_id=#{category.id}, updated_at=#{updatedAt} where id=#{id}
 	</update>
 	
 	<delete id="deleteArticle" parameterType="Article">
-		update articles set enabled=0 where id=#{id}
+		update articles set enabled=0, updated_at=#{updatedAt} where id=#{id}
 	</delete>
 </mapper>

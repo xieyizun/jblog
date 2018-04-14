@@ -21,8 +21,9 @@
 												<h4 th:text="*{subject}">暂无主题</h4>
 											</a>
 											<section>
-												<span>状态</span> 
+												<span th:text="*{status}==1 ? '发布' : '草稿'"></span> 
 												<i class="glyphicon glyphicon-calendar"></i><span th:text="*{createdAt}"></span>
+												<i class="glyphicon glyphicon-calendar"></i><span th:text="*{updatedAt}"></span>
 												<a th:href="@{'/article/edit/'+*{id}}"
 													href="#" class="btn btn-default btn-sm pull-right">编辑</a> <a
 													th:href="@{'/article/delete/'+*{id}}" href="#"

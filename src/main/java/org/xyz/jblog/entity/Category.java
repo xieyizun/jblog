@@ -18,6 +18,7 @@ public class Category extends EntityBase<Category> {
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private Category parent;
+	private User user;
 	
 	
 	/**
@@ -37,6 +38,12 @@ public class Category extends EntityBase<Category> {
 	}
 	public void setParent(Category parent) {
 		this.parent = parent;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

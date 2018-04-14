@@ -14,11 +14,11 @@
 								</a>
 								<!-- <div th:utext="*{content}">暂无内容</div> -->
 								<section>
-									<i class="glyphicon glyphicon-folder-open"></i><span th:text="*{category.name}">java</span>
-									<i class="glyphicon glyphicon-user"></i><span th:text="*{author.name}">xyz</span>
-									<i class="glyphicon glyphicon-calendar"></i><span th:text="*{createdAt}">2018/04/06</span>
-									<i class="glyphicon glyphicon-eye-open"></i><span>1000</span>
-									<i class="glyphicon glyphicon-comment"></i><span>50</span>
+									<i class="glyphicon glyphicon-folder-open"></i><span th:text="*{category.name}"></span>
+									<i class="glyphicon glyphicon-user"></i><span th:text="*{author.name}"></span>
+									<i class="glyphicon glyphicon-calendar"></i><span th:text="*{createdAt}"></span>
+									<i class="glyphicon glyphicon-eye-open"></i><span>0</span>
+									<i class="glyphicon glyphicon-comment"></i><span>0</span>
 									<a th:href="@{'/article/show/'+*{id}}" href="#" class="btn btn-default btn-sm pull-right">更多 ... </a>
 								</section>
 							</div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org">
 	<nav th:fragment="paginator" aria-label="Page navigation example">
-		<ul class="pagination justify-content-center">
+		<ul class="pagination justify-content-center" th:if="${pages > 1}">
 			<li class="page-item"
 				th:classappend="${currentPage==1} ? 'disabled' : ''"><a class="page-link" 
 				th:href="${currentPage==1} ? '#' : @{${nextPageUrl}+'?page='+${currentPage-1}}"

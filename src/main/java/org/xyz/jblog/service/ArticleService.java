@@ -7,7 +7,10 @@ package org.xyz.jblog.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.xyz.jblog.entity.Article;
+import org.xyz.jblog.entity.User;
 
 /**
  *
@@ -15,9 +18,11 @@ import org.xyz.jblog.entity.Article;
 public interface ArticleService {
 	List<Article> getAllArticles(int page);
 	List<Article> getArticlesByUserId(Integer userId, int page);
-	public Article getArticleById(Integer articleId);
-	public Article getArticleByIdAndUserId(Integer id, Integer userId);
-	public Integer insertArticle(Article article);
-	public Integer updateArticle(Article article);
-	public Integer deleteArticle(Article article);
+	Article getArticleById(Integer articleId);
+	Article getArticleByIdAndUserId(Integer id, Integer userId);
+	Integer insertArticle(Article article);
+	Integer updateArticle(Article article);
+	Integer deleteArticle(Article article);
+	
+	Article getArticleFromForm(HttpServletRequest request, User currentUser);
 }

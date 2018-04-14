@@ -14,7 +14,7 @@ import org.xyz.jblog.entity.Category;
  */
 public interface CategoryService {
 	
-	List<Category> getAllCategories();
+	List<Category> getAllCategoriesByUserId(Integer userId);
 	
 	Category getCategoryById(Integer id);
 }

@@ -19,6 +19,8 @@ public class Article extends EntityBase<Article> {
 	private String content;
 	private User author;
 	private Category category;
+	private Integer status;
+	private String tags;
 	
 	
 	
@@ -51,6 +53,18 @@ public class Article extends EntityBase<Article> {
 	}
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public String getTags() {
+		return tags;
+	}
+	public void setTags(String tags) {
+		this.tags = tags;
 	}
 	
 	

@@ -33,6 +33,7 @@ import org.xyz.jblog.utils.PaginatorUtils;
 @RequestMapping("/article")
 public class ArticleController {
 	private Logger logger = Logger.getLogger(getClass());
+	
 	@Autowired
 	private ArticleService articleService;
 	@Autowired
@@ -52,7 +53,8 @@ public class ArticleController {
 	@RequestMapping(value="/new", method=RequestMethod.GET)
 	public String newArticle(HttpServletRequest request, ModelMap map) {	
 		Article article = new Article();
-		List<Category> categories = categoryService.getAllCategories();
+		User currentUser = HttpUtils.getCurrentLoginUser(request);
+		List<Category> categories = categoryService.getAllCategoriesByUserId(currentUser.getId());
 		
 		map.addAttribute("article", article);
 		map.addAttribute("categories", categories);
@@ -64,8 +66,9 @@ public class ArticleController {
 	public String editArticle(HttpServletRequest request, @PathVariable("id") Integer id, ModelMap map) {
 		User currentUser = HttpUtils.getCurrentLoginUser(request);	
 		Article article = articleService.getArticleByIdAndUserId(id, currentUser.getId());
+		
 		if (article != null) {
-			List<Category> categories = categoryService.getAllCategories();
+			List<Category> categories = categoryService.getAllCategoriesByUserId(currentUser.getId());
 			map.addAttribute("article", article);
 			map.addAttribute("categories", categories);
 			
@@ -78,35 +81,20 @@ public class ArticleController {
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public String createOrUpdateArticle(HttpServletRequest request, ModelMap map) {
 		User currentUser = HttpUtils.getCurrentLoginUser(request);		
-		Integer articleId = request.getParameter("articleId")==null || "".equals(request.getParameter("articleId")) ? null : Integer.parseInt(request.getParameter("articleId"));
-		String subject = request.getParameter("subject");
-		String content = request.getParameter("content");
-		Integer categoryId = request.getParameter("categoryId")==null || "".equals(request.getParameter("categoryId")) ? null : Integer.parseInt(request.getParameter("categoryId"));
-		Article article = null;
-		Category category = categoryId==null ? null : categoryService.getCategoryById(categoryId);
-		// 更新
-		if (articleId != null) {
-			article = articleService.getArticleByIdAndUserId(articleId, currentUser.getId());
-			if (article != null) {
-				article.setContent(content);
-				article.setSubject(subject);
-				article.setCategory(category);
+		Article article = articleService.getArticleFromForm(request, currentUser);
+		
+		if (article == null) {
+			return "error404";
+		} else {
+			if (article.getId() != null) {
 				// 更新
 				articleService.updateArticle(article);
 			} else {
-				return "error404";
-			}
-		// 新建
-		} else {
-			article = new Article();
-			article.setContent(content);
-			article.setSubject(subject);
-			article.setAuthor(currentUser);
-			article.setCategory(category);
-			// 插入
-			Integer dbArticleId = articleService.insertArticle(article);
-			if (dbArticleId == null) {
-				return "articles/editArticle";
+				// 新建
+				Integer dbArticleId = articleService.insertArticle(article);
+				if (dbArticleId == null) {
+					return "articles/editArticle";
+				}
 			}
 		}
 		// 返回我的博客列表

@@ -18,6 +18,8 @@ public class User extends EntityBase<User> {
 	private String name;
 	private String email;
 	private String password;
+	private boolean isAdmin;
+	private boolean locked;
 	
 	
 	/**
@@ -48,5 +50,21 @@ public class User extends EntityBase<User> {
 	
 	public String toString() {
 		return this.name + "-" + this.email;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+	public boolean isLocked() {
+		return locked;
+	}
+
+	public void setLocked(boolean locked) {
+		this.locked = locked;
 	}
 }
