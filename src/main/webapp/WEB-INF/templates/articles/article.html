@@ -21,7 +21,7 @@
 									<div class="row">
 										<div class="col-sm-10 col-md-12" th:object="${article}">
 											<h4 th:text="*{subject}">暂无主题</h4>
-											<div th:text="*{content}">暂无内容</div>
+											<div th:utext="*{content}">暂无内容</div>
 											<section>
 												<i class="glyphicon glyphicon-folder-open"></i><span
 													th:text="*{category.name}">java</span> <i

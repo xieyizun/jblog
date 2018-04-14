@@ -28,7 +28,7 @@
 	<!-- 需登录 -->
 	<filter>
 		<filter-name>LoginFilter</filter-name>
-		<filter-class>org.xyz.blog.filter.LoginFilter</filter-class>
+		<filter-class>org.xyz.jblog.filter.LoginFilter</filter-class>
 		<init-param>
 			<param-name>ignoreLoginUrls</param-name>
 			<param-value>/article/show/;</param-value>

@@ -33,6 +33,7 @@
 		inner join categories c on a.category_id=c.id
 		inner join users u on a.user_id=u.id
 		where a.enabled=1
+		order by a.id desc
 	</select>
 	
 	<select id="getArticlesByUserId" resultMap="ArticleResult">
@@ -42,6 +43,7 @@
 		inner join categories c on a.category_id=c.id
 		inner join users u on a.user_id=u.id
 		where a.enabled=1 and a.user_id=#{userId}
+		order by a.id desc
 	</select>
 	
 	<select id="getArticleById" resultMap="ArticleResult">

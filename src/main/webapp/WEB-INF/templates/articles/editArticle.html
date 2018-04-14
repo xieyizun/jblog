@@ -2,7 +2,9 @@
 <html layout:decorator="layout/layout"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" th:href="@{/static/css/articles/article.css}" />
+	<link rel="stylesheet" th:href="@{/static/css/articles/article.css}" />
+	<script th:src="@{/static/js/lib/ckeditor/ckeditor.js}"></script>
+	<script th:src="@{/static/js/articles/articleForm.js}"></script>
 </head>
 <body>
 	<div layout:fragment="content">

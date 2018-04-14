@@ -9,5 +9,5 @@ package org.xyz.jblog.constants;
  *
  */
 public final class ConstantsNumber {
-	public static final int pageSize = 5;
+	public static final int pageSize = 10;
 }

@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-</head>
 <body>
 	<div th:fragment="form">
 		<div class="container">
@@ -13,21 +11,23 @@
 								<h4 class="panel-title">
 									<a data-toggle="collapse" data-parent="#accordion"
 										href="#collapseOne"><span class="glyphicon glyphicon-file">
-									</span>新建文章</a>
-									 <a th:href="@{'/'}" href="#" class="pull-right">返回首页</a>
+									</span>新建文章</a> <a th:href="@{'/'}" href="#" class="pull-right">返回首页</a>
 								</h4>
 							</div>
-							<div id="collapseOne" class="panel-collapse collapse in" th:object="${article}" >
-								<form class="panel-body" th:action="@{/article/save}" method="post">
+							<div id="collapseOne" class="panel-collapse collapse in"
+								th:object="${article}">
+								<form class="panel-body" th:action="@{/article/save}"
+									method="post">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="form-group">
-												<input type="hidden" name="articleId" th:value="*{id}" />
-												<input type="text" class="form-control" name="subject" th:value="*{subject}"
-													placeholder="主题" required />
+												<input type="hidden" name="articleId" th:value="*{id}" /> <input
+													type="text" class="form-control" name="subject"
+													th:value="*{subject}" placeholder="主题" required />
 											</div>
 											<div class="form-group">
-												<textarea class="form-control" placeholder="内容" name="content" th:text="*{content}"
+												<textarea id="ckeditor" class="form-control"
+													placeholder="内容" name="content" th:text="*{content}"
 													rows="5" required></textarea>
 											</div>
 										</div>
@@ -35,17 +35,18 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for="category">类别</label>
-												<select class="form-control" id="category" name="categoryId">
-													<option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
-													
+												<label for="category">类别</label> <select
+													class="form-control" id="category" name="categoryId">
+													<option th:each="category : ${categories}"
+														th:value="${category.id}" th:text="${category.name}"></option>
+
 												</select>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for="tags">标签</label>
-												<input type="text" class="form-control" id="tags" placeholder="标签" />
+												<label for="tags">标签</label> <input type="text"
+													class="form-control" id="tags" placeholder="标签" />
 											</div>
 										</div>
 									</div>
@@ -78,7 +79,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 </body>
 </html>

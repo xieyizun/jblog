@@ -17,7 +17,7 @@
 								<article th:each="article : ${list}">
 									<div class="row">
 										<div class="col-sm-10 col-md-12" th:object="${article}">
-											<a th:href="@{'/article/edit/'+*{id}}" href="#">
+											<a th:href="@{'/article/show/'+*{id}}" href="#">
 												<h4 th:text="*{subject}">暂无主题</h4>
 											</a>
 											<section>
