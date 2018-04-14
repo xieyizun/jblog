@@ -18,7 +18,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import org.xyz.jblog.entity.User;
 import org.xyz.jblog.service.UserService;
 
@@ -80,5 +79,10 @@ public class AccountController {
 		request.getSession().setAttribute("isLogin", false);
 		request.getSession().setAttribute("currentUser", null);
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/manage", method=RequestMethod.GET)
+	public String manage(HttpServletRequest request) {
+		return "account/manage";
 	}
 }

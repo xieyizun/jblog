@@ -7,32 +7,15 @@ package org.xyz.jblog.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.xyz.jblog.dao.UserDao;
 import org.xyz.jblog.entity.User;
 
 /**
  *
  */
-@Service
-public class UserService {
-	@Autowired
-	private UserDao userDao;
+public interface UserService {	
+	List<User> getAllUsers();
 	
-	@Transactional(readOnly=true)
-	public List<User> getAllUsers() {
-		return userDao.listUsers();
-	}
+	Integer saveUser(User user);
 	
-	@Transactional
-	public Integer saveUser(User user) {
-		return userDao.insertUserAndGetId(user);
-	}
-	
-	@Transactional
-	public List<User> findUserByNameOrEmail(User user) {
-		return userDao.findUserByNameOrEmail(user);
-	}
+	List<User> findUserByNameOrEmail(User user);
 }

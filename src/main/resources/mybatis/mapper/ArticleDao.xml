@@ -1,28 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.xyz.jblog.dao.ArticleDao">
-    <!-- List<Article> getAllArticles();
-	List<Article> getArticlesByUserId(Integer userId);
-	Article getArticleById(Integer articleId);
-	Article getArticleByIdAndUserId(Integer id, Integer userId);
-	Integer insertArticle(Article article);
-	Integer updateArticle(Article article);
-	Integer deleteArticle(Article article); -->
+	<sql id="articleColumns">
+		a.id, a.subject, a.content, a.created_at as article_created_at,
+		u.id as user_id, u.name as user_name, u.email as user_email,
+		c.id as category_id, c.name as category_name
+	</sql>
+	<resultMap type="Category" id="CategoryResult">
+		<id column="category_id" property="id" />
+		<result column="category_name" property="name" />
+	</resultMap>
 	
-	<select id="getAllArticles" resultType="Article">
-		select * from articles where enabled=1
+	<resultMap type="User" id="UserResult">
+		<id column="user_id" property="id" />
+		<result column="user_name" property="name" />
+		<result column="user_email" property="email" />
+	</resultMap>
+	
+    <resultMap type="Article" id="ArticleResult">
+    	<id column="id" property="id" />
+    	<result column="subject" property="subject" />
+    	<result column="content" property="content" />
+    	<result column="article_created_at" property="createdAt" />
+    	<association column="user_id" property="author" resultMap="UserResult" />
+    	<association column="category_id" property="category" resultMap="CategoryResult" />
+    </resultMap>
+	
+	<select id="getAllArticles" resultMap="ArticleResult">
+		select 
+		<include refid="articleColumns" />
+		from articles a
+		inner join categories c on a.category_id=c.id
+		inner join users u on a.user_id=u.id
+		where a.enabled=1
 	</select>
 	
-	<select id="getArticlesByUserId" resultType="Article">
-		select * from articles where enabled=1 and user_id=#{userId}
+	<select id="getArticlesByUserId" resultMap="ArticleResult">
+		select 
+		<include refid="articleColumns" />
+		from articles a
+		inner join categories c on a.category_id=c.id
+		inner join users u on a.user_id=u.id
+		where a.enabled=1 and a.user_id=#{userId}
 	</select>
 	
-	<select id="getArticleById" resultType="Article">
-		select * from articles where enabled=1 and id=#{id}
+	<select id="getArticleById" resultMap="ArticleResult">
+		select 
+		<include refid="articleColumns" />
+		from articles a
+		inner join categories c on a.category_id=c.id
+		inner join users u on a.user_id=u.id
+		where a.enabled=1 and a.id=#{id}
 	</select>
 	
-	<select id="getArticleByIdAndUserId" resultType="Article">
-		select * from articles where enabled=1 and id=#{id} and user_id=#{userId}
+	<select id="getArticleByIdAndUserId" resultMap="ArticleResult">
+		select a.id, a.subject, a.content, a.created_at as article_created_at,
+		u.id as user_id, u.name as user_name, u.email as user_email,
+		c.id as category_id, c.name as category_name
+		from articles a
+		inner join categories c on a.category_id=c.id
+		inner join users u on a.user_id=u.id
+		where a.enabled=1 and a.id=#{id} and a.user_id=#{userId}
 	</select>
 	
 	<insert id="insertArticle" parameterType="User" useGeneratedKeys="true" keyProperty="id">

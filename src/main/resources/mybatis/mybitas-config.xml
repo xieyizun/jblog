@@ -39,4 +39,10 @@
 	<typeAliases>
 		<package name="org.xyz.jblog.entity" />
 	</typeAliases>
+	<plugins>
+		<plugin interceptor="com.github.pagehelper.PageHelper">
+			<property name="dialect" value="mysql" />
+			<property name="rowBoundsWithCount" value="true" />
+		</plugin>
+	</plugins>
 </configuration>

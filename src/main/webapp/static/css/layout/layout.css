@@ -5,12 +5,20 @@ div.root-container {
 	margin: 50px 0 0 0;
 }
 a.login-link {
-		margin-top: 8px;
+	margin-top: 8px;
 }
 .current-user {
-	    margin-top: 15px;
+	margin-top: 15px;
 }
-
+.glyphicon {
+	margin-right: 6px;
+}
+.glyphicon-comment {
+	cursor: pointer;
+}
+.btn-default {
+	margin-right: 8px;
+}
 footer.footer {
 	background: black;
     text-align: center;

@@ -26,7 +26,7 @@
 			</div>
 			<a class="btn navbar-right login-link"
 				th:unless="${session.isLogin}==true"
-				th:href="@{account/login}">登录</a>
+				th:href="@{/account/login}">登录</a>
 			<ul class="nav navbar-nav navbar-right" th:if="${session.currentUser} != null">
 					<li><a href="#" th:text="${'欢迎 '+session.currentUser.name}">Link</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -35,9 +35,10 @@
 						<ul class="dropdown-menu">
 							<li><a th:href="@{/article/new}">写博客</a></li>
 							<li><a th:href="@{/article/myArticles}">我的博客</a></li>
-							<li><a href="#">账户管理</a></li>
+							<li><a th:href="@{/account/manage}">账户管理</a></li>
+							<li><a th:href="@{/admin/manage}">后台管理</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="#" th:href="@{account/logout}">退出</a></li>
+							<li><a href="#" th:href="@{/account/logout}">退出</a></li>
 						</ul></li>
 				</ul>
 		</div>

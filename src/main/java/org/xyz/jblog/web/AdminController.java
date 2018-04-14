@@ -14,5 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-
+	@RequestMapping(value="/manage")
+	public String manage() {
+		return "admin/manage";
+	}
 }
