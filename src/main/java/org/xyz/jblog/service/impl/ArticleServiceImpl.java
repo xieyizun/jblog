@@ -5,7 +5,11 @@
  */
 package org.xyz.jblog.service.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,8 +18,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.xyz.jblog.constants.ConstantsNumber;
 import org.xyz.jblog.dao.ArticleDao;
+import org.xyz.jblog.dao.ArticleTagDao;
 import org.xyz.jblog.dao.CategoryDao;
 import org.xyz.jblog.entity.Article;
+import org.xyz.jblog.entity.ArticleTag;
 import org.xyz.jblog.entity.Category;
 import org.xyz.jblog.entity.User;
 import org.xyz.jblog.service.ArticleService;
@@ -32,6 +38,8 @@ public class ArticleServiceImpl implements ArticleService {
 	private ArticleDao articleDao;
 	@Autowired
 	private CategoryDao categoryDao;
+	@Autowired
+	private ArticleTagDao articleTagDao;
 	
 	@Override
 	public List<Article> getAllArticles(int page) {
@@ -58,20 +66,59 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	@Transactional
 	public Integer insertArticle(Article article) {
-		String tags = article.getTags();
-		if (tags != null) {
-			String[] tagsArray = tags.split(",");
-			for (String tag : tagsArray) {
-				
+		Integer articleId = articleDao.insertArticle(article);
+		// 文章标签
+		if (articleId != null) {
+			String tags = article.getTags();
+			if (tags != null && !"".equals(tags)) {
+				Set<String> tagNames = new HashSet<>(Arrays.asList(tags.split(",")));
+				articleTagDao.bulkInsertArticleTags(article.getId(), tagNames);
 			}
 		}
-		return articleDao.insertArticle(article);
+		
+		return articleId;
 	}
 	
 	@Override
 	@Transactional
 	public Integer updateArticle(Article article) {
-		return articleDao.updateArticle(article);
+		Integer articleId = articleDao.updateArticle(article);
+		// 之前标签
+		List<ArticleTag> preArticleTags = articleTagDao.listArticleTags(article);
+		List<String> preTagsName = new ArrayList<String>();
+		for (ArticleTag tag : preArticleTags) {
+			preTagsName.add(tag.getName());
+		}
+		// 当前标签
+		String tagsStr = article.getTags();
+		List<String> currentTagNames = new ArrayList<String>();
+		if (!MyStringUtils.isEmptyOrNull(tagsStr)) {
+			currentTagNames = Arrays.asList(tagsStr.split(","));
+			// 新增标签
+			Set<String> newTags = new HashSet<>();
+			for (String tagName : currentTagNames) {
+				if (!preTagsName.contains(tagName)) {
+					newTags.add(tagName);
+				}
+			}
+			if (newTags.size() > 0) {
+				articleTagDao.bulkInsertArticleTags(article.getId(), newTags);
+			}
+		}
+		
+		// 废弃标签
+		List<ArticleTag> deletingTags = new ArrayList<>();
+		for (ArticleTag preTag : preArticleTags) {
+			if (!currentTagNames.contains(preTag.getName())) {
+				preTag.setEnabled(false);
+				deletingTags.add(preTag);
+			}
+		}
+		if (deletingTags.size() > 0) {
+			articleTagDao.bulkDeleteArticleTags(article, deletingTags);
+		}
+		
+		return articleId;
 	}
 	
 	@Override
@@ -90,7 +137,7 @@ public class ArticleServiceImpl implements ArticleService {
 		String content = request.getParameter("content");
 		String tags = request.getParameter("tags");
 		Integer status = MyStringUtils.strToInt(request.getParameter("status"));
-		
+
 		Integer categoryId = request.getParameter("categoryId")==null || "".equals(request.getParameter("categoryId")) ? null : Integer.parseInt(request.getParameter("categoryId"));
 		Article article = null;
 		Category category = categoryId==null ? null : categoryDao.getCategoryById(categoryId);

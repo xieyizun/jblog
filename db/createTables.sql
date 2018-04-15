@@ -58,47 +58,23 @@ create table article_attachments (
 	constraint `article_attachments` foreign key(`article_id`) references `articles`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-drop table if exists tags;
-create table tags (
-	`id` int not null auto_increment,
-	`name` varchar(100) not null,
-	
-	`created_at` datetime,
-	`updated_at` datetime,
-	`enabled` boolean default true,
-	primary key(`id`),
-	unique(`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-drop table if exists user_tags;
-create table user_tags(
-	`id` int not null auto_increment,
-	`user_id` int not null,
-	`tag_id` int not null,
-	
-	`created_at` datetime,
-	`updated_at` datetime,
-	`enabled` boolean default true,
-	primary key(`id`),
-	constraint `user_use_tag` foreign key(`tag_id`) references `tags`(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 drop table if exists article_tags;
-create table article_tags(
-	`id` int not null auto_increment,
+create table article_tags (
+	`id` int unsigned not null auto_increment,
+	`name` varchar(100) not null,
 	`article_id` int not null,
-	`tag_id` int not null,
 	
 	`created_at` datetime,
 	`updated_at` datetime,
 	`enabled` boolean default true,
 	primary key(`id`),
-	constraint `article_use_tag` foreign key(`tag_id`) references `tags`(`id`)
+	unique(`name`),
+	constraint `article_tag` foreign key(`article_id`) references `articles`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 drop table if exists comments;
 create table comments (
-	`id` int unsigned auto_increment,
+	`id` int unsigned auto_increment not null,
 	`content` text,
 	`article_id` int not null,
 	`user_id` int not null,
@@ -114,7 +90,7 @@ create table comments (
 
 drop table if exists favor_counters;
 create table favor_counters (
-	`id` int unsigned auto_increment,
+	`id` int unsigned auto_increment not null,
 	`article_id` int default null,
 	`user_id` int default null,
 	`comment_id` int default null,
@@ -128,7 +104,7 @@ create table favor_counters (
 
 drop table if exists view_counters;
 create table view_counters (
-	`id` int unsigned auto_increment,
+	`id` int unsigned auto_increment not null,
 	`article_id` int default null,
 	`user_id` int default null,
 	`view_count` int default 0,

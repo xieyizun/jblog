@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xyz.jblog.dao.ArticleTagDao">
+	<select id="listArticleTags" parameterType="Article" resultType="ArticleTag">
+		select * from article_tags where enabled=1 and article_id=#{article.id}
+	</select>
+	
+	<insert id="bulkInsertArticleTags" useGeneratedKeys="true" keyProperty="id">
+		<!-- <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+			select last_insert_id() as id
+		</selectKey> -->
+		insert into article_tags(name, article_id) 
+		values
+		<foreach collection="tagNames" item="tagName" index="index" separator=",">
+			(#{tagName}, #{articleId})
+		</foreach>
+	</insert>
+	
+	<update id="bulkDeleteArticleTags">
+		<foreach collection="tags" item="tag" index="index">
+			update article_tags
+			set enabled=0, updated_at=#{tag.updatedAt}
+			where id=#{tag.id}
+		</foreach>
+	</update>
+</mapper>

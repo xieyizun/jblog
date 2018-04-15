@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.xyz.jblog.dao.ArticleDao">
 	<sql id="articleColumns">
-		a.id, a.subject, a.content, a.created_at as article_created_at,
+		a.id, a.subject, a.content, a.status, a.created_at as article_created_at,
 		u.id as user_id, u.name as user_name, u.email as user_email,
 		c.id as category_id, c.name as category_name
 	</sql>
@@ -21,6 +21,7 @@
     	<id column="id" property="id" />
     	<result column="subject" property="subject" />
     	<result column="content" property="content" />
+    	<result column="status" property="status" />
     	<result column="article_created_at" property="createdAt" />
     	<association column="user_id" property="author" resultMap="UserResult" />
     	<association column="category_id" property="category" resultMap="CategoryResult" />
@@ -32,7 +33,7 @@
 		from articles a
 		inner join categories c on a.category_id=c.id
 		inner join users u on a.user_id=u.id
-		where a.enabled=1
+		where a.enabled=1 and a.status=1
 		order by a.id desc
 	</select>
 	
@@ -56,9 +57,8 @@
 	</select>
 	
 	<select id="getArticleByIdAndUserId" resultMap="ArticleResult">
-		select a.id, a.subject, a.content, a.created_at as article_created_at,
-		u.id as user_id, u.name as user_name, u.email as user_email,
-		c.id as category_id, c.name as category_name
+		select 
+		<include refid="articleColumns" />
 		from articles a
 		inner join categories c on a.category_id=c.id
 		inner join users u on a.user_id=u.id
@@ -70,7 +70,7 @@
 	</insert>
 	
 	<update id="updateArticle" parameterType="User" keyProperty="id">
-		update articles set subject=#{subject}, content=#{content}, category_id=#{category.id}, updated_at=#{updatedAt} where id=#{id}
+		update articles set subject=#{subject}, content=#{content}, category_id=#{category.id}, updated_at=#{updatedAt}, status=#{status} where id=#{id}
 	</update>
 	
 	<delete id="deleteArticle" parameterType="Article">

@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.xyz.jblog.entity.Article;
+import org.xyz.jblog.entity.ArticleTag;
 import org.xyz.jblog.entity.Category;
 import org.xyz.jblog.entity.User;
 import org.xyz.jblog.service.ArticleService;
+import org.xyz.jblog.service.ArticleTagService;
 import org.xyz.jblog.service.CategoryService;
 import org.xyz.jblog.utils.HttpUtils;
 import org.xyz.jblog.utils.PaginatorUtils;
@@ -36,6 +38,8 @@ public class ArticleController {
 	
 	@Autowired
 	private ArticleService articleService;
+	@Autowired
+	private ArticleTagService articleTagService;
 	@Autowired
 	private CategoryService categoryService;
 	
@@ -68,9 +72,12 @@ public class ArticleController {
 		Article article = articleService.getArticleByIdAndUserId(id, currentUser.getId());
 		
 		if (article != null) {
+			List<ArticleTag> tags = articleTagService.listArticleTags(article);
+			article.setTags(articleTagService.convertTagsToStr(tags));
 			List<Category> categories = categoryService.getAllCategoriesByUserId(currentUser.getId());
 			map.addAttribute("article", article);
 			map.addAttribute("categories", categories);
+			
 			
 			return "articles/editArticle";
 		} else {

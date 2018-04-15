@@ -9,12 +9,12 @@ package org.xyz.jblog.utils;
  *
  */
 public final class MyStringUtils {
-	public static boolean isEmptyOrNumm(String str) {
+	public static boolean isEmptyOrNull(String str) {
 		return str==null || "".equals(str);
 	}
 	
 	public static Integer strToInt(String str) {
-		if (MyStringUtils.isEmptyOrNumm(str)) {
+		if (MyStringUtils.isEmptyOrNull(str)) {
 			return null;
 		} else {
 			return Integer.parseInt(str);

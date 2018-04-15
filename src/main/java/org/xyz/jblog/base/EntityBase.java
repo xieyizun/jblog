@@ -22,6 +22,7 @@ public abstract class EntityBase<T> implements Serializable, Paginatable {
 	private Integer id;
 	private String createdAt = MyDateUtils.formatDateTime(new Date());
 	private String updatedAt = MyDateUtils.formatDateTime(new Date());
+	private boolean enabled;
 	
 	public Integer getId() {
 		return id;
@@ -40,6 +41,12 @@ public abstract class EntityBase<T> implements Serializable, Paginatable {
 	}
 	public void setUpdatedAt(String updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 	
 	
