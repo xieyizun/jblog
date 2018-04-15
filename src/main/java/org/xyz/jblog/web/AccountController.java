@@ -7,6 +7,7 @@ package org.xyz.jblog.web;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,9 +18,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.xyz.jblog.entity.Article;
+import org.xyz.jblog.entity.Category;
 import org.xyz.jblog.entity.User;
+import org.xyz.jblog.service.ArticleService;
+import org.xyz.jblog.service.CategoryService;
 import org.xyz.jblog.service.UserService;
+import org.xyz.jblog.utils.HttpUtils;
+import org.xyz.jblog.utils.MyStringUtils;
+import org.xyz.jblog.utils.PaginatorUtils;
 
 /**
  *
@@ -31,6 +40,10 @@ public class AccountController {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ArticleService articleService;
+	@Autowired
+	private CategoryService categoryService;
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login(ModelMap map) {
@@ -82,7 +95,30 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value="/manage", method=RequestMethod.GET)
-	public String manage(HttpServletRequest request) {
+	public String manage(HttpServletRequest request, @RequestParam(defaultValue="article") String type, ModelMap map) {
+		User currentUser = HttpUtils.getCurrentLoginUser(request);
+		
+		switch(type) {
+			case "article":
+				Integer page = MyStringUtils.strToInt(request.getParameter("page"));
+				List<Article> myArticles = articleService.getArticlesByUserId(currentUser.getId(), page);
+				Map<String, Object> pageInfo = PaginatorUtils.getPainatorInfo(myArticles, "/account/manage/");
+				map.addAllAttributes(pageInfo);
+				map.addAttribute("list", myArticles);
+				break;
+			case "category":
+				List<Category> categories = categoryService.getAllCategoriesByUserId(currentUser.getId());
+				map.addAttribute("categories", categories);
+				map.addAttribute("category", new Category());
+				break;
+			case "account":
+				map.addAttribute("currentUser", currentUser);
+				break;
+			default:
+				return "error404";
+		}
+		
+		map.addAttribute("manageType", type);
 		return "account/manage";
 	}
 }

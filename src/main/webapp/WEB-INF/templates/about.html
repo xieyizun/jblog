@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html layout:decorator="layout/layout"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" th:href="@{/static/css/index.css}" />
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid main-container">
+			<div th:insert="components/sidebar :: sidebar"></div>
+			<div th:insert="components/aboutMe :: aboutMe"></div>
+		</div>
+	</div>
+</body>
+</html>

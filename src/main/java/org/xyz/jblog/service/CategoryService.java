@@ -17,4 +17,10 @@ public interface CategoryService {
 	List<Category> getAllCategoriesByUserId(Integer userId);
 	
 	Category getCategoryById(Integer id);
+	
+	Category getCategoryByIdAndUserId(Integer id, Integer userId);
+	
+	Integer insertCategory(Category category);
+	Integer updateCategory(Category category);
+
 }

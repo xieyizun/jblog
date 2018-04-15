@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="col-md-2 sidebar" th:fragment="sidebar">
+	<ul class="nav nav-pills nav-stacked">
+		<li th:classappend="${manageType=='article'} ? 'active' : ''">
+			<a th:href="@{'/account/manage?type=' + 'article'}">文章管理</a>
+		</li>
+		<li th:classappend="${manageType=='category'} ? 'active' : ''">
+			<a th:href="@{'/account/manage?type=' + 'category'}">分类管理</a>
+		</li>
+		<li th:classappend="${manageType=='account'} ? 'active' : ''">
+			<a th:href="@{'/account/manage?type=' + 'account'}">账号管理</a>
+		</li>
+	</ul>
+</div>
+</html>

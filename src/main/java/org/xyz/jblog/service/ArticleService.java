@@ -17,7 +17,7 @@ import org.xyz.jblog.entity.User;
  */
 public interface ArticleService {
 	List<Article> getAllArticles(int page);
-	List<Article> getArticlesByUserId(Integer userId, int page);
+	List<Article> getArticlesByUserId(Integer userId, Integer page);
 	Article getArticleById(Integer articleId);
 	Article getArticleByIdAndUserId(Integer id, Integer userId);
 	Integer insertArticle(Article article);

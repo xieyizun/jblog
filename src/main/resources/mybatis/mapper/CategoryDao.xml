@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.xyz.jblog.dao.CategoryDao">
+	<sql id="categoryColumns">
+		c.*, p.id as parentId, p.name as parentName
+	</sql>
+	
+	<resultMap id="CategoryResult" type="Category">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<association column="parent_id" property="parent" resultMap="parentCategoryResult" />
+	</resultMap>
+	
+	<resultMap id="parentCategoryResult" type="Category">
+		<id column="parentId" property="id" />
+		<result column="parentName" property="name" />
+	</resultMap>
+	
     <select id="getAllCategoriesByUserId" resultType="Category">
 		select * from categories where enabled=1 and user_id=#{userId}
 	</select>
@@ -8,4 +23,25 @@
 	<select id="getCategoryById" resultType="Category">
 		select * from categories where enabled=1 and id=#{id}
 	</select>
+	
+	<select id="getCategoryByIdAndUserId" resultMap="CategoryResult">
+		select
+		<include refid="categoryColumns" />
+		from categories c
+		left join categories p on p.enabled=1 and c.parent_id=p.id
+		where c.enabled=1 and c.id=#{id} and c.user_id=#{userId}
+	</select>
+	
+	<insert id="insertCategory" parameterType="Category" useGeneratedKeys="true" keyProperty="id">
+		insert into categories(name, parent_id, user_id, created_at) values (#{name}, #{parent.id}, #{user.id}, #{createdAt})
+	</insert>
+	
+	<update id="updateCategory" parameterType="Category" keyProperty="id">
+		update categories set name=#{name}, parent_id=#{parent.id}, updated_at=#{updatedAt} where id=#{id}
+	</update>
+	
+	<update id="deleteCategory" parameterType="Category" keyProperty="id">
+		update categories set enabled=0 updated_at=#{updatedAt} where id=#{id}
+	</update>
+
 </mapper>

@@ -128,6 +128,6 @@ public class ArticleController {
 		Map<String, Object> pageInfo = PaginatorUtils.getPainatorInfo(myArticles, "/article/myArticles/");
 		map.addAllAttributes(pageInfo);
 		map.addAttribute("list", myArticles);
-		return "articles/myArticlesList";
+		return "articles/myArticles";
 	}
 }

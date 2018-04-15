@@ -36,6 +36,13 @@ public class HomeController {
 		Map<String, Object> pageInfo = PaginatorUtils.getPainatorInfo(recentArticles, "/");
 		map.addAllAttributes(pageInfo);
 		map.put("list", recentArticles);
+		map.addAttribute("type", "home");
 		return "index";
+	}
+	
+	@RequestMapping(value="/about")
+	public String about(ModelMap map) {
+		map.addAttribute("type", "about");
+		return "about";
 	}
 }

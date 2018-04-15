@@ -34,9 +34,9 @@
 						aria-expanded="false">我 <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a th:href="@{/article/new}">写博客</a></li>
-							<li><a th:href="@{/article/myArticles}">我的博客</a></li>
+							<!-- <li><a th:href="@{/article/myArticles}">我的博客</a></li> -->
 							<li><a th:href="@{/account/manage}">账户管理</a></li>
-							<li><a th:href="@{/admin/manage}">后台管理</a></li>
+							<li th:if="${session.currentUser.isAdmin}"><a th:href="@{/admin/manage}">后台管理</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="#" th:href="@{/account/logout}">退出</a></li>
 						</ul></li>

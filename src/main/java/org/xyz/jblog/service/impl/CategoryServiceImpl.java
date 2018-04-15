@@ -37,4 +37,31 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryDao.getCategoryById(id);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.xyz.jblog.service.CategoryService#getCategoryByIdAndUserId(java.lang.Integer, java.lang.Integer)
+	 */
+	@Override
+	public Category getCategoryByIdAndUserId(Integer id, Integer userId) {
+		// TODO Auto-generated method stub
+		return categoryDao.getCategoryByIdAndUserId(id, userId);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.xyz.jblog.service.CategoryService#insertCategory(org.xyz.jblog.entity.Category)
+	 */
+	@Override
+	public Integer insertCategory(Category category) {
+		// TODO Auto-generated method stub
+		return categoryDao.insertCategory(category);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.xyz.jblog.service.CategoryService#updateCategory(org.xyz.jblog.entity.Category)
+	 */
+	@Override
+	public Integer updateCategory(Category category) {
+		// TODO Auto-generated method stub
+		return categoryDao.updateCategory(category);
+	}
+
 }

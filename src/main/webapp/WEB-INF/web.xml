@@ -39,6 +39,7 @@
 		<url-pattern>/article/*</url-pattern>
 		<url-pattern>/account/manage</url-pattern>
 		<url-pattern>/admin/*</url-pattern>
+		<url-pattern>/category/*</url-pattern>
 	</filter-mapping>
 	<!--编码转换-->
     <filter>

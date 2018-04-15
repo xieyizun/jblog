@@ -48,7 +48,10 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 	
 	@Override
-	public List<Article> getArticlesByUserId(Integer userId, int page) {
+	public List<Article> getArticlesByUserId(Integer userId, Integer page) {
+		if (null == page) {
+			page = 1;
+		}
 		PageHelper.startPage(page, ConstantsNumber.pageSize);
 		return articleDao.getArticlesByUserId(userId);
 	}
