@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="col-md-10 content" th:fragment="articlesList">
 	<div class="panel panel-default">
-		<div class="panel-heading">最近文章</div>
+		<div class="panel-heading" th:text="${title}==null ? '最近文章' : ${title}"></div>
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-9 col-xs-12">
@@ -14,7 +14,7 @@
 								</a>
 								<!-- <div th:utext="*{content}">暂无内容</div> -->
 								<section>
-									<i class="glyphicon glyphicon-folder-open"></i><span th:text="*{category.name}"></span>
+									<!-- <i class="glyphicon glyphicon-folder-open"></i><span th:text="*{category.name}"></span> -->
 									<i class="glyphicon glyphicon-user"></i><span th:text="*{author.name}"></span>
 									<i class="glyphicon glyphicon-calendar"></i><span th:text="*{createdAt}"></span>
 									<i class="glyphicon glyphicon-eye-open"></i><span>0</span>

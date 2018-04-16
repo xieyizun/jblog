@@ -31,7 +31,7 @@
 		select 
 		<include refid="articleColumns" />
 		from articles a
-		inner join categories c on a.category_id=c.id
+		left join categories c on a.category_id=c.id
 		inner join users u on a.user_id=u.id
 		where a.enabled=1 and a.status=1
 		order by a.id desc
@@ -41,7 +41,7 @@
 		select 
 		<include refid="articleColumns" />
 		from articles a
-		inner join categories c on a.category_id=c.id
+		left join categories c on a.category_id=c.id
 		inner join users u on a.user_id=u.id
 		where a.enabled=1 and a.user_id=#{userId}
 		order by a.id desc
@@ -51,7 +51,7 @@
 		select 
 		<include refid="articleColumns" />
 		from articles a
-		inner join categories c on a.category_id=c.id
+		left join categories c on a.category_id=c.id
 		inner join users u on a.user_id=u.id
 		where a.enabled=1 and a.id=#{id}
 	</select>
@@ -60,7 +60,7 @@
 		select 
 		<include refid="articleColumns" />
 		from articles a
-		inner join categories c on a.category_id=c.id
+		left join categories c on a.category_id=c.id
 		inner join users u on a.user_id=u.id
 		where a.enabled=1 and a.id=#{id} and a.user_id=#{userId}
 	</select>

@@ -48,6 +48,7 @@ public class ArticleController {
 		Article article = articleService.getArticleById(id);
 		if (article != null) {
 			mmap.addAttribute("article", article);
+			mmap.addAttribute("type", "home");
 			return "articles/article";
 		} else {
 			return "error404";

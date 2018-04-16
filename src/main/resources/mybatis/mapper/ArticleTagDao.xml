@@ -1,8 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.xyz.jblog.dao.ArticleTagDao">
+	<sql id="articleColumns">
+		a.id, a.subject, a.content, a.status, a.created_at as article_created_at,
+		u.id as user_id, u.name as user_name, u.email as user_email
+	</sql>
+	
+	<resultMap type="User" id="UserResult">
+		<id column="user_id" property="id" />
+		<result column="user_name" property="name" />
+		<result column="user_email" property="email" />
+	</resultMap>
+	
+    <resultMap type="Article" id="ArticleResult">
+    	<id column="id" property="id" />
+    	<result column="subject" property="subject" />
+    	<result column="content" property="content" />
+    	<result column="status" property="status" />
+    	<result column="article_created_at" property="createdAt" />
+    	<association column="user_id" property="author" resultMap="UserResult" />
+    </resultMap>
+    
+	<select id="getArticleTagById" resultType="ArticleTag">
+		select * from article_tags where enabled=1 and id=#{articleTagId}
+	</select>
+	
 	<select id="listArticleTags" parameterType="Article" resultType="ArticleTag">
 		select * from article_tags where enabled=1 and article_id=#{article.id}
+	</select>
+	
+	<select id="listUserTags" resultType="java.util.HashMap">
+		select t.name, count(a.id) as articlesCount
+		from article_tags t
+		inner join articles a on a.enabled=1 and a.status=1 and a.id=t.article_id
+		inner join users u on u.id=a.user_id and u.id=#{userId}
+		where t.enabled=1
+		group by t.name
+	</select>
+	
+	<select id="listArticlesByTagNameAndUserId" resultMap="ArticleResult">
+		select 
+		<include refid="articleColumns" />
+		from articles a
+		inner join users u on u.enabled=1 and u.id=#{userId} and u.id=a.user_id
+		inner join article_tags t on t.enabled=1 and t.name=#{tagName} and t.article_id=a.id
+		where a.enabled=1
 	</select>
 	
 	<insert id="bulkInsertArticleTags" useGeneratedKeys="true" keyProperty="id">

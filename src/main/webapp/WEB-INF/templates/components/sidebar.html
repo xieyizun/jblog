@@ -3,9 +3,9 @@
 <div class="col-md-2 sidebar" th:fragment="sidebar">
 	<ul class="nav nav-pills nav-stacked">
 		<li th:classappend="${type}=='home' ? 'active' : ''"><a th:href="@{/}">首页</a></li>
-		<li><a href="#">归档</a></li>
-		<li><a href="#">分类</a></li>
-		<li><a href="#">标签</a></li>
+		<li th:classappend="${type}=='archive' ? 'active' : ''"><a href="#">归档</a></li>
+		<!-- <li th:classappend="${type}=='category' ? 'active' : ''"><a href="#">分类</a></li> -->
+		<li th:classappend="${type}=='tag' ? 'active' : ''"><a th:href="@{/tag/}">标签</a></li>
 		<li th:classappend="${type}=='about' ? 'active' : ''"><a th:href="@{/about}">关于我</a></li>
 	</ul>
 </div>

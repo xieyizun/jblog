@@ -68,7 +68,6 @@ create table article_tags (
 	`updated_at` datetime,
 	`enabled` boolean default true,
 	primary key(`id`),
-	unique(`name`),
 	constraint `article_tag` foreign key(`article_id`) references `articles`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -10,4 +10,5 @@ package org.xyz.jblog.constants;
  */
 public final class ConstantsNumber {
 	public static final int pageSize = 10;
+	public static final int ME_ID=1;
 }
